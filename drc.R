@@ -7,8 +7,11 @@ suppressPackageStartupMessages(library(plyr))
 suppressPackageStartupMessages(library(ggplot2))
 library(lattice)
 
+#x<-c('reshape2', 'ggplot2', 'plyr', 'drc', 'lattice')
+#lapply(x, require, character.only=T)
+
 #post data from csv file.  names and descriptions of columns
-D<-labkey.data
+D<-read.csv('datafile.csv', header=TRUE)
 
 
 
@@ -33,14 +36,14 @@ for (index in 1:nrow(D))
 	j<-data.frame(name= 204800, value=D$t204800[index])
 	k<-data.frame(name= 409600, value=D$t409600[index])
 	
-	
-	
 	m<-rbind(a,b,c,d,e,f,g,h,i,j,k) 	
 	
 	#error handling
 	tryCatch({
 		
 	#use of five parameter curve fit for use in defining coefficients for equation
+	#bioassay specific analysis is best accomplished by a 5 parameter logistic nonlinear regression model
+	#http://www.miraibio.com/blog/2009/02/5-pl-logistic-regression/
 	
 	fit = drm(value~name, data=m, fct=LL.5(), na.action=na.omit);	
 
