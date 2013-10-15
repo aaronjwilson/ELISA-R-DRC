@@ -14,6 +14,7 @@ library(lattice)
 D<-read.csv('datafile.csv', header=TRUE)
 
 
+#when time permits want to work out strategy for using cast and ddply rather than a loop function
 
 results<-data.frame(ptid=NA, cohort=NA, visitid=NA, fit.f=NA, titer=NA);
 for (index in 1:nrow(D))
