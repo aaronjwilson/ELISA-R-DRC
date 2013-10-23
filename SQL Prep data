@@ -24,8 +24,10 @@ INNER JOIN
 (SELECT 
 q.VisitID,
 AVG(((q.neg_1+q.neg_2)/2)) AS BCK,
+--determination of an endpoint cutoff value by averaging background plus three standard deviations
 (AVG(((q.neg_1+q.neg_2)/2)) + 3*(STDDEV((q.neg_1+q.neg_2)/2))) AS CTOF
 FROM "ELISA JRCSF gp120" q
+--if cutoff is to be determined by plate can add in plateID if available.
 GROUP BY q.VisitID) BG
 
 ON 
